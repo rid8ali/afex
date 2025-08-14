@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AFEX | Handbook</title>
+  <meta name="description" content="AFEX Handbook – Master practical, real‑world finance. Dream • Build • Lead • Learn." />
+  <meta name="theme-color" content="#0d0f15" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0e14;          /* dark base */
+      --panel:#101623;       /* card base */
+      --panel-2:#0d1320;     /* deeper */
+      --txt:#e8eefb;         /* text */
+      --muted:#a9b3c6;
+      --brand:#7c9cf4;       /* afex blue */
+      --brand-2:#55ffd7;     /* cyber mint */
+      --accent:#ff5ea1;      /* rose */
+      --ring: 0 0 0 2px color-mix(in oklab, var(--brand) 60%, transparent);
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35), 0 2px 8px rgba(0,0,0,.35);
+      --grid: minmax(0,1fr);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; background:linear-gradient(180deg,var(--bg),#0a0c12 45%, #07090f 100%);
+      color:var(--txt); font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      letter-spacing:.01em;
+    }
+    /* ---------- Utility ---------- */
+    .container{width:min(1100px,92vw); margin-inline:auto}
+    .row{display:grid; grid-template-columns:repeat(12,1fr); gap:22px}
+    .card{background:linear-gradient(180deg,var(--panel),var(--panel-2)); border:1px solid rgba(124,156,244,.15); border-radius:var(--radius); box-shadow:var(--shadow); position:relative; overflow:hidden}
+    .card::after{content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(1200px 250px at top left, rgba(124,156,244,.08), transparent 60%)}
+    .pad{padding:28px}
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px; background:rgba(124,156,244,.12); border:1px solid rgba(124,156,244,.25); color:var(--txt); font-weight:600; text-transform:uppercase; letter-spacing:.08em; font-size:12px}
+    .muted{color:var(--muted)}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:14px; background:linear-gradient(180deg,#1a2240,#141b33); border:1px solid rgba(124,156,244,.35); color:#eaf0ff; font-weight:700; text-decoration:none; box-shadow:0 4px 18px rgba(124,156,244,.15); transition:.2s transform,.2s box-shadow}
+    .btn:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(124,156,244,.22)}
+    .glow{filter:drop-shadow(0 0 14px rgba(124,156,244,.35))}
+    .mono{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace}
+    .center{text-align:center}
+    .nowrap{white-space:nowrap}
+    .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:22px}
+    .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+    .grid-4{display:grid; grid-template-columns:repeat(4,1fr); gap:22px}
+    @media (max-width:980px){.grid-4{grid-template-columns:repeat(2,1fr)} .grid-3{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:720px){.grid-2{grid-template-columns:1fr} .grid-3{grid-template-columns:1fr} .grid-4{grid-template-columns:1fr}}
+
+    /* ---------- Top Navigation ---------- */
+    .nav{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(14px);
+      background:rgba(11,14,20,.6); border-bottom:1px solid rgba(124,156,244,.15);
+    }
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 0}
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
+    .logo{width:36px; height:36px; border-radius:10px; background:conic-gradient(from 160deg at 50% 50%, var(--brand), var(--brand-2), var(--accent), var(--brand)); border:1px solid rgba(255,255,255,.15); box-shadow:0 6px 18px rgba(85,255,215,.15)}
+    .brand-name{font-weight:900; letter-spacing:.08em; text-transform:uppercase}
+    .nav a.link{color:var(--muted); text-decoration:none; font-weight:700; padding:10px 12px; border-radius:10px}
+    .nav a.link:hover{background:rgba(124,156,244,.12); color:var(--txt)}
+    .nav-cta{display:flex; align-items:center; gap:10px}
+    .toggle{cursor:pointer; display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; border:1px solid rgba(124,156,244,.35); background:linear-gradient(180deg,#12192b,#0f1627)}
+
+    /* ---------- Hero ---------- */
+    .hero{position:relative; padding:70px 0 40px}
+    .scanlines{position:absolute; inset:-1px; background:repeating-linear-gradient( to bottom, rgba(124,156,244,.06), rgba(124,156,244,.06) 1px, transparent 2px ); opacity:.4; pointer-events:none;}
+    .headline{font-size:clamp(34px,4.4vw,64px); line-height:1.02; font-weight:900; letter-spacing:.02em}
+    .glitch{ position:relative; display:inline-block}
+    .glitch::before,.glitch::after{content:attr(data-text); position:absolute; inset:0; pointer-events:none}
+    .glitch::before{transform:translate(2px,0); color:var(--brand-2); mix-blend-mode:screen; filter:blur(.4px)}
+    .glitch::after{transform:translate(-2px,0); color:var(--accent); mix-blend-mode:screen; filter:blur(.4px)}
+    .sub{font-size:clamp(14px,1.4vw,18px); color:var(--muted); max-width:800px}
+
+    /* ---------- Section ---------- */
+    section{padding:44px 0}
+    section h2{font-size:clamp(22px,2.2vw,30px); margin:0 0 8px; letter-spacing:.04em}
+    section h3{font-size:20px; margin:0 0 8px}
+    .divider{height:1px; width:100%; background:linear-gradient(90deg, transparent, rgba(124,156,244,.3), transparent); margin:22px 0}
+
+    /* ---------- Spotlight / Founders ---------- */
+    .founders{display:grid; grid-template-columns:repeat(2,1fr); gap:22px}
+    @media (max-width:720px){.founders{grid-template-columns:1fr}}
+    .founder{display:flex; gap:18px; align-items:center}
+    .avatar{width:82px; height:82px; border-radius:16px; background:linear-gradient(180deg,#131a2c,#0f1526); border:1px solid rgba(124,156,244,.35); display:grid; place-items:center; font-weight:800; font-size:24px}
+    .founder a{color:var(--brand-2); text-decoration:none; font-weight:700}
+
+    /* ---------- Comparison Table ---------- */
+    table.compare{width:100%; border-collapse:separate; border-spacing:0 10px; font-size:15px}
+    table.compare th, table.compare td{padding:14px 16px; text-align:left; vertical-align:top}
+    table.compare th{color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:.08em}
+    table.compare tr{background:linear-gradient(180deg,#0f1627,#0d1221); border:1px solid rgba(124,156,244,.25)}
+    table.compare tr td:first-child{font-weight:800; width:180px}
+    table.compare tr{border-radius:14px}
+
+    /* ---------- Timeline ---------- */
+    .timeline{position:relative; display:grid; gap:16px}
+    .timeline::before{content:""; position:absolute; left:10px; top:0; bottom:0; width:2px; background:linear-gradient(180deg, rgba(124,156,244,.25), transparent)}
+    .t-item{display:grid; grid-template-columns:28px 1fr; gap:14px; align-items:start}
+    .t-dot{width:20px; height:20px; border-radius:999px; background:var(--brand); outline:3px solid rgba(124,156,244,.25)}
+
+    /* ---------- Footer ---------- */
+    footer{padding:40px 0 70px; color:var(--muted)}
+    .foot{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap}
+
+    /* ---------- Small niceties ---------- */
+    .scrim{position:absolute; inset:0; background:radial-gradient(600px 260px at 20% -40%, rgba(85,255,215,.12), transparent 60%), radial-gradient(600px 260px at 80% -40%, rgba(124,156,244,.18), transparent 60%)}
+    .kbd{padding:2px 6px; border-radius:6px; border:1px solid rgba(124,156,244,.35); background:linear-gradient(180deg,#151c2f,#0f1627); font-family:"JetBrains Mono",ui-monospace,monospace; font-size:12px}
+    .ghost{opacity:.8}
+
+    /* ---------- Light mode ---------- */
+    .light{--bg:#f6f8ff; --panel:#ffffff; --panel-2:#f2f4ff; --txt:#0a0d18; --muted:#425271; --brand:#3657ff; --brand-2:#00d7b0; --accent:#f72e7c; --shadow:0 10px 28px rgba(40,56,120,.14), 0 2px 8px rgba(36,44,84,.08)}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="AFEX Home">
+        <div class="logo" aria-hidden="true"></div>
+        <div class="brand-name">AFEX</div>
+      </a>
+      <nav style="display:flex; gap:6px; flex-wrap:wrap">
+        <a class="link" href="#handbook">Handbook</a>
+        <a class="link" href="#spotlight">Spotlight</a>
+        <a class="link" href="#differentiation">Differentiation</a>
+        <a class="link" href="#membership">Membership</a>
+        <a class="link" href="#curriculum">Curriculum</a>
+        <a class="link" href="#leadership">Leadership</a>
+        <a class="link" href="#requirements">Requirements</a>
+        <a class="link" href="#comms">Communication</a>
+        <a class="link" href="#tips">Tips & Tricks</a>
+        <a class="link" href="#competition">Competition</a>
+      </nav>
+      <div class="nav-cta">
+        <button id="mode" class="toggle" aria-pressed="false" title="Toggle theme">
+          <span class="mono">◎</span> Theme
+        </button>
+        <a class="btn" href="#join">Join AFEX</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero container">
+      <div class="scrim"></div>
+      <div class="scanlines"></div>
+      <div class="pill glow mono">Powered by Anant LLC</div>
+      <h1 class="headline" id="handbook" style="margin:14px 0 12px">
+        <span class="glitch" data-text="HHAANNDDBBOOOOKK">HHAANNDDBBOOOOKK</span>
+      </h1>
+      <p class="sub">D R E A M • B U I L D • L E A D • L E A R N — Master practical, real‑world finance. Lead consulting projects with real businesses. Compete nationally with a modern community.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px">
+        <a class="btn" href="#curriculum">Explore Curriculum</a>
+        <a class="btn" href="#competition">View Competitions</a>
+      </div>
+    </section>
+
+    <section id="spotlight">
+      <div class="container row">
+        <div class="card pad" style="grid-column:1 / -1">
+          <div class="pill mono">Spotlight</div>
+          <h2 class="glow" style="margin-top:10px">Meet the front of it all</h2>
+          <div class="founders" style="margin-top:8px">
+            <div class="founder">
+              <div class="avatar">VK</div>
+              <div>
+                <div style="font-weight:800; font-size:18px">Vennela Kunchala</div>
+                <div class="muted">Co‑Founder</div>
+                <a href="#" target="_blank" rel="noopener">Click for LinkedIn →</a>
+              </div>
+            </div>
+            <div class="founder">
+              <div class="avatar">VG</div>
+              <div>
+                <div style="font-weight:800; font-size:18px">Vrund Gurjar</div>
+                <div class="muted">Co‑Founder</div>
+                <a href="#" target="_blank" rel="noopener">Click for LinkedIn →</a>
+              </div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="grid-3">
+            <div class="card pad">
+              <div class="pill mono">Spring</div>
+              <h3>Finance</h3>
+              <p class="muted">Curriculum aligned to real‑world money skills and decisions that actually matter.</p>
+            </div>
+            <div class="card pad">
+              <div class="pill mono">Economics</div>
+              <h3>Experts</h3>
+              <p class="muted">Guest speakers, mentors, and a national brain‑trust to accelerate your growth.</p>
+            </div>
+            <div class="card pad">
+              <div class="pill mono">Powered</div>
+              <h3>By Anant LLC</h3>
+              <p class="muted">Operational support, polish, and infrastructure for a best‑in‑class experience.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="intro">
+      <div class="container row">
+        <div class="card pad" style="grid-column:1 / -1">
+          <div class="pill mono">What is AFEX?</div>
+          <h2 class="glow">Vision & Mission</h2>
+          <p class="muted">Master practical, real‑world finance. Lead consulting projects with real businesses. Compete nationally against—and with—a modern community.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="differentiation">
+      <div class="container row">
+        <div class="card pad" style="grid-column:1 / -1">
+          <div class="pill mono">Differentiation</div>
+          <h2 class="glow">What makes AFEX so special?</h2>
+          <div class="divider"></div>
+          <div class="grid-2">
+            <div class="card pad">
+              <h3>AFEX vs Traditional Business Clubs</h3>
+              <table class="compare" aria-label="AFEX comparison table">
+                <thead>
+                  <tr>
+                    <th>Category</th>
+                    <th>AFEX</th>
+                    <th>Traditional</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Focus</td>
+                    <td>Advanced personal finance, consulting, wealth strategy</td>
+                    <td>General business, marketing, entrepreneurship</td>
+                  </tr>
+                  <tr>
+                    <td>Curriculum</td>
+                    <td>Credit, investing, insurance, real estate, real case studies</td>
+                    <td>Basic business concepts and simulations</td>
+                  </tr>
+                  <tr>
+                    <td>Accessibility</td>
+                    <td>Inclusive to all—from first‑time learners to future financiers</td>
+                    <td>Often formal and gated by competitions</td>
+                  </tr>
+                  <tr>
+                    <td>Community</td>
+                    <td>National network, mentors, Discord, projects</td>
+                    <td>School‑based meetings only</td>
+                  </tr>
+                  <tr>
+                    <td>Outcome</td>
+                    <td>Real consulting, internships, competitions, national content</td>
+                    <td>Simulations and local contests</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card pad">
+              <h3>Annual Fee</h3>
+              <p class="muted">The money is not just for participation—it's access to curriculum, competitions, and a professional network.</p>
+              <div class="card pad" style="display:flex; align-items:center; justify-content:space-between">
+                <div>
+                  <div class="muted">Membership Info</div>
+                  <div class="headline" style="font-size:42px; margin-top:6px">$15</div>
+                  <div class="muted">— cheaper than most clubs —</div>
+                </div>
+                <a class="btn" href="#join">Become a member</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="membership">
+      <div class="container row">
+        <div class="card pad" style="grid-column:1 / -1">
+          <div class="pill mono">Curriculum Access</div>
+          <h2 class="glow">Overview</h2>
+          <p class="muted">AFEX empowers students with practical finance education across key areas: credit & debt, investing & wealth‑building, insurance, and real estate. Designed for all experience levels, AFEX meets you where you are and helps you grow into a confident financial leader.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="leadership">
+      <div class="container row">
+        <div class="card pad" style="grid-column:1 / -1">
+          <div class="pill mono">Real Experience • Real Leadership</div>
+          <h2 class="glow">Why leadership matters</h2>
+          <div class="grid-3" style="margin-top:10px">
+            <div class="card pad">
+              <h3>Apply knowledge</h3>
+              <p class="muted">Consulting projects, case competitions, and guest speakers translate learning into results.</p>
+            </div>
+            <div class="card pad">
+              <h3>Build your portfolio</h3>
+              <p class="muted">Internships, writing teams, and national roles help you stand out.</p>
+            </div>
+            <div class="card pad">
+              <h3>Network</h3>
+              <p class="muted">5+ networking opportunities and <span class="nowrap">15+ meetings</span> per academic year.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="requirements">
+      <div class="container row">
+        <div class="card pad" style="grid-column:1 / -1">
+          <div class="pill mono">Requirements</div>
+          <h2 class="glow">Chapter expectations</h2>
+          <div class="grid-3" style="margin-top:10px">
+            <div class="card pad">
+              <h3>Organization</h3>
+              <p class="muted">Be organized at either the school or city level.</p>
+            </div>
+            <div class="card pad">
+              <h3>Meetings</h3>
+              <p class="muted">15+ meetings per academic year.</p>
+            </div>
+            <div class="card pad">
+              <h3>Community</h3>
+              <p class="muted">Host fundraising or outreach events annually.</p>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="grid-2">
+            <div class="card pad">
+              <h3>Scholarships</h3>
+              <p class="muted">AFEX offers merit‑based scholarships to students showing leadership, initiative, and real impact. Awards go to those who grow chapters, win competitions, or lead nationally.</p>
+            </div>
+            <div class="card pad">
+              <h3>Communication</h3>
+              <p class="muted">Discord is our hub for member updates and resources. Slack is used by national officers for planning and coordination.</p>
+              <div style="display:flex; gap:12px; flex-wrap:wrap">
+                <span class="pill">Discord</span>
+                <span class="pill">Slack</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tips">
+      <div class="container row">
+        <div class="card pad" style="grid-column:1 / -1">
+          <div class="pill mono">Tips & Tricks</div>
+          <h2 class="glow">Chapter foundations</h2>
+          <div class="grid-3" style="margin-top:10px">
+            <div class="card pad">
+              <h3>Core Team</h3>
+              <ul class="muted">
+                <li>Recruit 3–5 committed members to start</li>
+                <li>Diverse skills: leadership, marketing, finance</li>
+                <li>Quality over quantity</li>
+              </ul>
+            </div>
+            <div class="card pad">
+              <h3>Location</h3>
+              <ul class="muted">
+                <li>Secure a reliable meeting space</li>
+                <li>Pick accessible locations (parking, transit)</li>
+                <li>Consider hybrid options for flexibility</li>
+              </ul>
+            </div>
+            <div class="card pad">
+              <h3>Outreach</h3>
+              <ul class="muted">
+                <li>Collaborate with business/econ clubs</li>
+                <li>Promote via social media & announcements</li>
+                <li>Host a Finance 101 kickoff session</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="grid-2">
+            <div class="card pad">
+              <h3>Leadership recruitment</h3>
+              <p class="muted">High‑impact officers build strong chapters. Target students already leading other clubs and underclassmen with potential for long‑term continuity.</p>
+            </div>
+            <div class="card pad">
+              <h3>Useful platforms</h3>
+              <ul class="muted">
+                <li><strong>Google Forms</strong> — screen applicants, set standards, track attendance</li>
+                <li><strong>Notion</strong> — organize applications & workflows</li>
+                <li><strong>Tally</strong> — simplify officer applications, collect key info</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <h3 class="glow">Meeting timeline</h3>
+          <div class="timeline" style="margin-top:12px">
+            <div class="t-item">
+              <div class="t-dot"></div>
+              <div>
+                <strong>Networking • 10 minutes</strong>
+                <p class="muted">Icebreakers and member updates.</p>
+              </div>
+            </div>
+            <div class="t-item">
+              <div class="t-dot"></div>
+              <div>
+                <strong>Education block • 25 minutes</strong>
+                <p class="muted">Core content or a guest speaker.</p>
+              </div>
+            </div>
+            <div class="t-item">
+              <div class="t-dot"></div>
+              <div>
+                <strong>Application • 15 minutes</strong>
+                <p class="muted">Case study or project—AFEX will provide.</p>
+              </div>
+            </div>
+            <div class="t-item">
+              <div class="t-dot"></div>
+              <div>
+                <strong>Business wrap • 10 minutes</strong>
+                <p class="muted">Updates and next steps. This is the most common meeting type.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="curriculum">
+      <div class="container row">
+        <div class="card pad" style="grid-column:1 / -1">
+          <div class="pill mono">Curriculum & Competition</div>
+          <h2 class="glow">Curriculum overview</h2>
+          <div class="grid-4" style="margin-top:10px">
+            <div class="card pad">
+              <h3>Credit & Debt</h3>
+              <p class="muted">Use credit and debit wisely, build strong credit early, and unlock future opportunities.</p>
+            </div>
+            <div class="card pad">
+              <h3>Investing</h3>
+              <p class="muted">Learn how stocks and index funds grow wealth through smart, long‑term investing.</p>
+            </div>
+            <div class="card pad">
+              <h3>Insurance</h3>
+              <p class="muted">Understand how insurance protects your finances—health, auto, life, and renters’ coverage.</p>
+            </div>
+            <div class="card pad">
+              <h3>Real Estate</h3>
+              <p class="muted">See how rentals, appreciation, and smart ownership build wealth.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="networking">
+      <div class="container row">
+        <div class="card pad" style="grid-column:1 / -1">
+          <div class="pill mono">Networking</div>
+          <h2 class="glow">Members • Events</h2>
+          <p class="muted">Members across the country connect via Discord and Slack—fostering community, sharing ideas, asking questions, and building relationships. We also host regular virtual events with other clubs and professionals to expand your network beyond your local school.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="competition">
+      <div class="container row">
+        <div class="card pad" style="grid-column:1 / -1">
+          <div class="pill mono">Competition</div>
+          <h2 class="glow">Stock Pitch & Consultation</h2>
+          <div class="grid-2" style="margin-top:10px">
+            <div class="card pad">
+              <h3>Stock Pitch</h3>
+              <p class="muted">Held twice a year. Teams of up to three present real investment ideas to a panel of judges—building skill in research, financial analysis, and public speaking.</p>
+              <p class="muted">Categories and guidelines shared closer to the event.</p>
+              <a class="btn" href="#join">Get notified</a>
+            </div>
+            <div class="card pad">
+              <h3>Consultation</h3>
+              <p class="muted">Teams of 3–5 solve real business challenges using real company data over two weeks. Present strategic recommendations to industry experts.</p>
+              <p class="muted">More details shared closer to the event.</p>
+              <a class="btn" href="#join">Get notified</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="join">
+      <div class="container row">
+        <div class="card pad center" style="grid-column:1 / -1">
+          <div class="pill mono">Ready?</div>
+          <h2 class="glow" style="margin-top:10px">Join AFEX</h2>
+          <p class="muted">Become part of a modern finance community. National network. Real experience. Real results.</p>
+          <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:10px">
+            <a class="btn" href="mailto:hello@afex.org?subject=Join%20AFEX">Email us</a>
+            <a class="btn" href="#" onclick="alert('Discord invite coming soon!')">Join Discord</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container foot">
+      <div style="display:flex; align-items:center; gap:12px">
+        <div class="logo" aria-hidden="true" style="width:28px; height:28px"></div>
+        <span class="mono">AFEX © <span id="year"></span></span>
+      </div>
+      <div class="mono ghost">D R E A M • B U I L D • L E A D • L E A R N</div>
+    </div>
+  </footer>
+
+  <button id="toTop" title="Back to top" aria-label="Back to top" style="position:fixed; right:18px; bottom:18px; border:none; cursor:pointer; padding:12px 14px; border-radius:14px; background:linear-gradient(180deg,#1a2240,#141b33); color:white; border:1px solid rgba(124,156,244,.35); box-shadow:0 8px 24px rgba(0,0,0,.35); display:none">↑</button>
+
+  <script>
+    // Luigi-level polish ✨: robust theme handling, motion safety, and small UX niceties.
+    (function(){
+      const root = document.documentElement;
+      const modeBtn = document.getElementById('mode');
+      const toTop = document.getElementById('toTop');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)');
+      const getMode = () => localStorage.getItem('afex-mode');
+      const setMode = val => localStorage.setItem('afex-mode', val);
+      const applyMode = (val) => {
+        if(val === 'light'){ root.classList.add('light'); modeBtn.setAttribute('aria-pressed','true'); }
+        else { root.classList.remove('light'); modeBtn.setAttribute('aria-pressed','false'); }
+      };
+      const initMode = () => {
+        const saved = getMode();
+        if(saved){ applyMode(saved); }
+        else { applyMode(prefersLight.matches ? 'light' : 'dark'); }
+      };
+      modeBtn.addEventListener('click', () => {
+        const nowLight = !root.classList.contains('light');
+        applyMode(nowLight ? 'light' : 'dark');
+        setMode(nowLight ? 'light' : 'dark');
+      });
+      prefersLight.addEventListener('change', e => {
+        if(!getMode()) applyMode(e.matches ? 'light' : 'dark');
+      });
+
+      // Back to top visibility
+      const onScroll = () => { toTop.style.display = window.scrollY > 400 ? 'block' : 'none'; };
+      window.addEventListener('scroll', onScroll, {passive:true});
+      toTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+      // External link nicety
+      document.addEventListener('click', (e)=>{
+        const a = e.target.closest('a');
+        if(!a) return;
+        const url = new URL(a.href, location.href);
+        if(url.origin !== location.origin){ a.setAttribute('target','_blank'); a.setAttribute('rel','noopener'); }
+      });
+
+      // Current year
+      const y = document.getElementById('year'); if(y) y.textContent = new Date().getFullYear();
+
+      // Small hover parallax on cards (nikilis-esque ✨)
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(c => {
+        c.addEventListener('mousemove', (e)=>{
+          const r = c.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - .5;
+          const y = (e.clientY - r.top) / r.height - .5;
+          c.style.transform = `translateY(-2px) perspective(800px) rotateX(${y*-2}deg) rotateY(${x*2}deg)`;
+        });
+        c.addEventListener('mouseleave', ()=>{ c.style.transform = 'translateY(0)'; });
+      });
+
+      initMode();
+      onScroll();
+    })();
+  </script>
+</body>
+</html>
