@@ -5,117 +5,163 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AFEX | Handbook</title>
   <meta name="description" content="AFEX Handbook – Master practical, real‑world finance. Dream • Build • Lead • Learn." />
-  <meta name="theme-color" content="#0d0f15" />
+  <meta name="theme-color" content="#2b1557" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
+    /* ==========================
+       AFEX x nikilis x Luigi — PURPLE EDITION
+       Heavy polish, animated, all buttons wired.
+       Pure HTML/CSS/JS, GitHub Pages ready.
+    ===========================*/
+
     :root{
-      --bg:#0b0e14;          /* dark base */
-      --panel:#101623;       /* card base */
-      --panel-2:#0d1320;     /* deeper */
-      --txt:#e8eefb;         /* text */
-      --muted:#a9b3c6;
-      --brand:#7c9cf4;       /* afex blue */
-      --brand-2:#55ffd7;     /* cyber mint */
-      --accent:#ff5ea1;      /* rose */
-      --ring: 0 0 0 2px color-mix(in oklab, var(--brand) 60%, transparent);
+      /* Core text + surfaces */
+      --bg: #0a0713;          /* deep space purple */
+      --panel: #120b24;       /* card */
+      --panel-2:#0f0a1d;      /* deeper */
+      --txt: #f3ecff;
+      --muted:#b8a9d6;
+
+      /* Multi‑palette purples (swappable) */
+      --p1:#a78bfa; /* violet 400 */
+      --p2:#8b5cf6; /* violet 500 */
+      --p3:#7c3aed; /* violet 600 */
+      --p4:#6d28d9; /* violet 700 */
+      --p5:#c084fc; /* fuchsia 400 */
+      --mint:#48ffe7; /* cyber mint accent */
+      --rose:#ff4fa3; /* neon rose */
+
+      --brand: var(--p2);
+      --brand-2: var(--p5);
+      --accent: var(--rose);
+
       --radius: 18px;
-      --shadow: 0 10px 30px rgba(0,0,0,.35), 0 2px 8px rgba(0,0,0,.35);
-      --grid: minmax(0,1fr);
+      --shadow: 0 12px 40px rgba(0,0,0,.45), 0 2px 10px rgba(0,0,0,.35);
+      --ring: 0 0 0 2px color-mix(in oklab, var(--brand) 65%, transparent);
     }
+
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{
-      margin:0; background:linear-gradient(180deg,var(--bg),#0a0c12 45%, #07090f 100%);
-      color:var(--txt); font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      letter-spacing:.01em;
+    body{margin:0; color:var(--txt); background:radial-gradient(1200px 600px at 20% -20%, rgba(124,58,237,.20), transparent 60%), radial-gradient(1000px 520px at 80% -10%, rgba(168,85,247,.18), transparent 60%), var(--bg); font-family:Inter, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;}
+
+    /* Animated star grid background */
+    .bg-grid{position:fixed; inset:0; pointer-events:none; background:
+      linear-gradient(transparent 0, rgba(139,92,246,.08) 1px, transparent 2px) top left/ 100% 22px,
+      linear-gradient(90deg, transparent 0, rgba(139,92,246,.08) 1px, transparent 2px) top left/ 22px 100%;
+      mask-image: radial-gradient(60% 60% at 50% 0%, #000 60%, transparent 100%);
+      opacity:.55; animation:grid-pan 24s linear infinite;
     }
-    /* ---------- Utility ---------- */
-    .container{width:min(1100px,92vw); margin-inline:auto}
+    @keyframes grid-pan{from{transform:translateY(0)} to{transform:translateY(22px)}}
+
+    /* Utility */
+    .container{width:min(1150px,92vw); margin-inline:auto}
     .row{display:grid; grid-template-columns:repeat(12,1fr); gap:22px}
-    .card{background:linear-gradient(180deg,var(--panel),var(--panel-2)); border:1px solid rgba(124,156,244,.15); border-radius:var(--radius); box-shadow:var(--shadow); position:relative; overflow:hidden}
-    .card::after{content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(1200px 250px at top left, rgba(124,156,244,.08), transparent 60%)}
+    .card{position:relative; background:linear-gradient(180deg, color-mix(in oklab, var(--panel) 88%, #000 12%), var(--panel-2)); border:1px solid rgba(139,92,246,.35); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden}
     .pad{padding:28px}
-    .pill{display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px; background:rgba(124,156,244,.12); border:1px solid rgba(124,156,244,.25); color:var(--txt); font-weight:600; text-transform:uppercase; letter-spacing:.08em; font-size:12px}
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px; background:linear-gradient(180deg, rgba(167,139,250,.18), rgba(167,139,250,.10)); border:1px solid rgba(167,139,250,.45); color:var(--txt); font-weight:700; text-transform:uppercase; letter-spacing:.08em; font-size:12px}
+    .btn{position:relative; display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:14px; background:linear-gradient(180deg, #2a1757, #1c1040); border:1px solid rgba(167,139,250,.55); color:#f7f4ff; font-weight:800; text-decoration:none; box-shadow:0 8px 30px rgba(139,92,246,.25); transition:transform .18s ease, box-shadow .18s ease; cursor:pointer; overflow:hidden}
+    .btn:hover{transform:translateY(-2px); box-shadow:0 16px 40px rgba(139,92,246,.35)}
+    .btn:focus-visible{outline:none; box-shadow:0 0 0 3px rgba(72,255,231,.55)}
+    .btn[data-magnet]{will-change:transform}
+    .btn .ripple{position:absolute; border-radius:999px; transform:translate(-50%,-50%); pointer-events:none; width:12px; height:12px; background:radial-gradient(circle, rgba(192,132,252,.55) 0, rgba(192,132,252,0) 70%); animation:rip 700ms ease-out forwards}
+    @keyframes rip{to{opacity:0; transform:translate(-50%,-50%) scale(8)}}
+
     .muted{color:var(--muted)}
-    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:14px; background:linear-gradient(180deg,#1a2240,#141b33); border:1px solid rgba(124,156,244,.35); color:#eaf0ff; font-weight:700; text-decoration:none; box-shadow:0 4px 18px rgba(124,156,244,.15); transition:.2s transform,.2s box-shadow}
-    .btn:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(124,156,244,.22)}
-    .glow{filter:drop-shadow(0 0 14px rgba(124,156,244,.35))}
-    .mono{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace}
+    .mono{font-family:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace}
     .center{text-align:center}
-    .nowrap{white-space:nowrap}
     .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:22px}
     .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
     .grid-4{display:grid; grid-template-columns:repeat(4,1fr); gap:22px}
     @media (max-width:980px){.grid-4{grid-template-columns:repeat(2,1fr)} .grid-3{grid-template-columns:repeat(2,1fr)} }
-    @media (max-width:720px){.grid-2{grid-template-columns:1fr} .grid-3{grid-template-columns:1fr} .grid-4{grid-template-columns:1fr}}
+    @media (max-width:720px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
 
-    /* ---------- Top Navigation ---------- */
-    .nav{
-      position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(14px);
-      background:rgba(11,14,20,.6); border-bottom:1px solid rgba(124,156,244,.15);
-    }
+    /* Sticky nav */
+    .nav{position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(14px); background:rgba(22,12,44,.6); border-bottom:1px solid rgba(139,92,246,.35)}
     .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 0}
     .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
-    .logo{width:36px; height:36px; border-radius:10px; background:conic-gradient(from 160deg at 50% 50%, var(--brand), var(--brand-2), var(--accent), var(--brand)); border:1px solid rgba(255,255,255,.15); box-shadow:0 6px 18px rgba(85,255,215,.15)}
+    .logo{width:36px; height:36px; border-radius:10px; background:conic-gradient(from 160deg at 50% 50%, var(--p5), var(--p2), var(--mint), var(--rose), var(--p5)); border:1px solid rgba(255,255,255,.18); box-shadow:0 6px 18px rgba(192,132,252,.25)}
     .brand-name{font-weight:900; letter-spacing:.08em; text-transform:uppercase}
-    .nav a.link{color:var(--muted); text-decoration:none; font-weight:700; padding:10px 12px; border-radius:10px}
-    .nav a.link:hover{background:rgba(124,156,244,.12); color:var(--txt)}
-    .nav-cta{display:flex; align-items:center; gap:10px}
-    .toggle{cursor:pointer; display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; border:1px solid rgba(124,156,244,.35); background:linear-gradient(180deg,#12192b,#0f1627)}
+    .nav a.link{color:var(--muted); text-decoration:none; font-weight:800; padding:10px 12px; border-radius:10px}
+    .nav a.link:hover{background:rgba(167,139,250,.15); color:var(--txt)}
 
-    /* ---------- Hero ---------- */
-    .hero{position:relative; padding:70px 0 40px}
-    .scanlines{position:absolute; inset:-1px; background:repeating-linear-gradient( to bottom, rgba(124,156,244,.06), rgba(124,156,244,.06) 1px, transparent 2px ); opacity:.4; pointer-events:none;}
-    .headline{font-size:clamp(34px,4.4vw,64px); line-height:1.02; font-weight:900; letter-spacing:.02em}
-    .glitch{ position:relative; display:inline-block}
+    .nav-cta{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+    .toggle, .palette{cursor:pointer; display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; border:1px solid rgba(167,139,250,.55); background:linear-gradient(180deg,#241347,#1b0f37); color:var(--txt); font-weight:700}
+
+    /* Hero */
+    .hero{position:relative; padding:72px 0 44px}
+    .scanlines{position:absolute; inset:-1px; background:repeating-linear-gradient( to bottom, rgba(167,139,250,.06), rgba(167,139,250,.06) 1px, transparent 2px ); opacity:.5; pointer-events:none}
+    .orb{position:absolute; width:44vmin; height:44vmin; border-radius:999px; filter:blur(40px); opacity:.35; background:radial-gradient(circle at 50% 50%, var(--p5), transparent 60%)}
+    .orb.o1{top:-10vmin; left:-5vmin}
+    .orb.o2{top:-12vmin; right:-6vmin; background:radial-gradient(circle at 50% 50%, var(--mint), transparent 60%)}
+
+    .headline{font-size:clamp(34px,4.6vw,66px); line-height:1.02; font-weight:900; letter-spacing:.02em; text-wrap:balance}
+    .glitch{position:relative; display:inline-block; background:linear-gradient(90deg, var(--p5), var(--p2), var(--p3)); -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:0 0 24px rgba(167,139,250,.4)}
     .glitch::before,.glitch::after{content:attr(data-text); position:absolute; inset:0; pointer-events:none}
-    .glitch::before{transform:translate(2px,0); color:var(--brand-2); mix-blend-mode:screen; filter:blur(.4px)}
-    .glitch::after{transform:translate(-2px,0); color:var(--accent); mix-blend-mode:screen; filter:blur(.4px)}
-    .sub{font-size:clamp(14px,1.4vw,18px); color:var(--muted); max-width:800px}
+    .glitch::before{transform:translate(2px,0); color:rgba(72,255,231,.75); mix-blend-mode:screen; filter:blur(.6px)}
+    .glitch::after{transform:translate(-2px,0); color:rgba(255,79,163,.75); mix-blend-mode:screen; filter:blur(.6px)}
+    .sub{font-size:clamp(14px,1.4vw,18px); color:var(--muted); max-width:880px}
 
-    /* ---------- Section ---------- */
-    section{padding:44px 0}
-    section h2{font-size:clamp(22px,2.2vw,30px); margin:0 0 8px; letter-spacing:.04em}
+    /* Sections */
+    section{padding:46px 0}
+    section h2{font-size:clamp(22px,2.4vw,32px); margin:0 0 8px; letter-spacing:.04em}
     section h3{font-size:20px; margin:0 0 8px}
-    .divider{height:1px; width:100%; background:linear-gradient(90deg, transparent, rgba(124,156,244,.3), transparent); margin:22px 0}
+    .divider{height:1px; width:100%; background:linear-gradient(90deg, transparent, rgba(167,139,250,.6), transparent); margin:22px 0}
 
-    /* ---------- Spotlight / Founders ---------- */
+    /* Founders */
     .founders{display:grid; grid-template-columns:repeat(2,1fr); gap:22px}
     @media (max-width:720px){.founders{grid-template-columns:1fr}}
     .founder{display:flex; gap:18px; align-items:center}
-    .avatar{width:82px; height:82px; border-radius:16px; background:linear-gradient(180deg,#131a2c,#0f1526); border:1px solid rgba(124,156,244,.35); display:grid; place-items:center; font-weight:800; font-size:24px}
-    .founder a{color:var(--brand-2); text-decoration:none; font-weight:700}
+    .avatar{width:88px; height:88px; border-radius:18px; background:linear-gradient(180deg,#1a0f33,#150a29); border:1px solid rgba(167,139,250,.55); display:grid; place-items:center; font-weight:900; font-size:24px}
+    .founder a{color:var(--mint); text-decoration:none; font-weight:800}
 
-    /* ---------- Comparison Table ---------- */
+    /* Comparison table */
     table.compare{width:100%; border-collapse:separate; border-spacing:0 10px; font-size:15px}
     table.compare th, table.compare td{padding:14px 16px; text-align:left; vertical-align:top}
-    table.compare th{color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:.08em}
-    table.compare tr{background:linear-gradient(180deg,#0f1627,#0d1221); border:1px solid rgba(124,156,244,.25)}
-    table.compare tr td:first-child{font-weight:800; width:180px}
+    table.compare th{color:var(--muted); font-weight:800; text-transform:uppercase; letter-spacing:.08em}
+    table.compare tr{background:linear-gradient(180deg,#1a1036,#170e2f); border:1px solid rgba(167,139,250,.45)}
+    table.compare tr td:first-child{font-weight:900; width:180px}
     table.compare tr{border-radius:14px}
 
-    /* ---------- Timeline ---------- */
+    /* Timeline */
     .timeline{position:relative; display:grid; gap:16px}
-    .timeline::before{content:""; position:absolute; left:10px; top:0; bottom:0; width:2px; background:linear-gradient(180deg, rgba(124,156,244,.25), transparent)}
+    .timeline::before{content:""; position:absolute; left:10px; top:0; bottom:0; width:2px; background:linear-gradient(180deg, rgba(167,139,250,.4), transparent)}
     .t-item{display:grid; grid-template-columns:28px 1fr; gap:14px; align-items:start}
-    .t-dot{width:20px; height:20px; border-radius:999px; background:var(--brand); outline:3px solid rgba(124,156,244,.25)}
+    .t-dot{width:20px; height:20px; border-radius:999px; background:var(--p2); outline:3px solid rgba(167,139,250,.25)}
 
-    /* ---------- Footer ---------- */
-    footer{padding:40px 0 70px; color:var(--muted)}
+    /* Footer */
+    footer{padding:44px 0 80px; color:var(--muted)}
     .foot{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap}
 
-    /* ---------- Small niceties ---------- */
-    .scrim{position:absolute; inset:0; background:radial-gradient(600px 260px at 20% -40%, rgba(85,255,215,.12), transparent 60%), radial-gradient(600px 260px at 80% -40%, rgba(124,156,244,.18), transparent 60%)}
-    .kbd{padding:2px 6px; border-radius:6px; border:1px solid rgba(124,156,244,.35); background:linear-gradient(180deg,#151c2f,#0f1627); font-family:"JetBrains Mono",ui-monospace,monospace; font-size:12px}
-    .ghost{opacity:.8}
+    /* Reveal animations */
+    .reveal{opacity:0; transform:translateY(14px) scale(.98); transition:opacity .6s ease, transform .6s ease}
+    .reveal.show{opacity:1; transform:none}
+    .hover-tilt{transition:transform .2s ease}
+    .hover-tilt:hover{transform:translateY(-2px) rotateX(1deg) rotateY(-1deg)}
 
-    /* ---------- Light mode ---------- */
-    .light{--bg:#f6f8ff; --panel:#ffffff; --panel-2:#f2f4ff; --txt:#0a0d18; --muted:#425271; --brand:#3657ff; --brand-2:#00d7b0; --accent:#f72e7c; --shadow:0 10px 28px rgba(40,56,120,.14), 0 2px 8px rgba(36,44,84,.08)}
+    /* Light mode */
+    .light{
+      --bg:#f8f6ff; --panel:#ffffff; --panel-2:#f2edff; --txt:#0a0d18; --muted:#4b4460; --shadow:0 10px 28px rgba(65, 34, 120, .14), 0 2px 8px rgba(36,44,84,.08)
+    }
+
+    /* Side TOC */
+    .toc{position:fixed; left:16px; bottom:16px; z-index:40}
+    .toc-panel{display:none; position:absolute; bottom:56px; left:0; width:260px; background:linear-gradient(180deg,#1a1036,#120b24); border:1px solid rgba(167,139,250,.45); border-radius:16px; box-shadow:var(--shadow); padding:12px}
+    .toc-panel a{display:block; padding:8px 10px; border-radius:10px; color:var(--txt); text-decoration:none; font-weight:600}
+    .toc-panel a:hover{background:rgba(167,139,250,.15)}
+
+    /* Print for PDF export */
+    @media print{
+      .nav, .toc, #toTop { display:none !important }
+      body{background:white}
+      .card{break-inside:avoid}
+    }
   </style>
 </head>
 <body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
   <header class="nav">
     <div class="container nav-inner">
       <a class="brand" href="#top" aria-label="AFEX Home">
@@ -135,65 +181,68 @@
         <a class="link" href="#competition">Competition</a>
       </nav>
       <div class="nav-cta">
-        <button id="mode" class="toggle" aria-pressed="false" title="Toggle theme">
+        <button id="palette" class="palette" title="Change purple vibe" data-magnet>🎨 Palette</button>
+        <button id="mode" class="toggle" aria-pressed="false" title="Toggle theme" data-magnet>
           <span class="mono">◎</span> Theme
         </button>
-        <a class="btn" href="#join">Join AFEX</a>
+        <a class="btn" href="#join" data-magnet>Join AFEX</a>
       </div>
     </div>
   </header>
 
   <main id="top">
-    <section class="hero container">
-      <div class="scrim"></div>
+    <section class="hero container reveal" id="handbook">
       <div class="scanlines"></div>
-      <div class="pill glow mono">Powered by Anant LLC</div>
-      <h1 class="headline" id="handbook" style="margin:14px 0 12px">
+      <div class="orb o1"></div>
+      <div class="orb o2"></div>
+      <div class="pill mono">Powered by Anant LLC</div>
+      <h1 class="headline" style="margin:14px 0 12px">
         <span class="glitch" data-text="HHAANNDDBBOOOOKK">HHAANNDDBBOOOOKK</span>
       </h1>
       <p class="sub">D R E A M • B U I L D • L E A D • L E A R N — Master practical, real‑world finance. Lead consulting projects with real businesses. Compete nationally with a modern community.</p>
       <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px">
-        <a class="btn" href="#curriculum">Explore Curriculum</a>
-        <a class="btn" href="#competition">View Competitions</a>
+        <a class="btn" href="#curriculum" data-magnet>Explore Curriculum</a>
+        <a class="btn" id="downloadPdf" href="#" data-magnet>Download PDF</a>
+        <button class="btn" id="shareBtn" data-magnet>Share</button>
       </div>
     </section>
 
-    <section id="spotlight">
+    <section id="spotlight" class="reveal">
       <div class="container row">
-        <div class="card pad" style="grid-column:1 / -1">
+        <div class="card pad hover-tilt" style="grid-column:1 / -1">
           <div class="pill mono">Spotlight</div>
-          <h2 class="glow" style="margin-top:10px">Meet the front of it all</h2>
+          <h2 style="margin-top:10px">Meet the front of it all</h2>
           <div class="founders" style="margin-top:8px">
             <div class="founder">
               <div class="avatar">VK</div>
               <div>
-                <div style="font-weight:800; font-size:18px">Vennela Kunchala</div>
+                <div style="font-weight:900; font-size:18px">Vennela Kunchala</div>
                 <div class="muted">Co‑Founder</div>
-                <a href="#" target="_blank" rel="noopener">Click for LinkedIn →</a>
+                <a href="https://www.linkedin.com/search/results/all/?keywords=Vennela%20Kunchala" target="_blank" rel="noopener">LinkedIn →</a>
               </div>
             </div>
             <div class="founder">
               <div class="avatar">VG</div>
               <div>
-                <div style="font-weight:800; font-size:18px">Vrund Gurjar</div>
+                <div style="font-weight:900; font-size:18px">Vrund Gurjar</div>
                 <div class="muted">Co‑Founder</div>
-                <a href="#" target="_blank" rel="noopener">Click for LinkedIn →</a>
+                <a href="https://www.linkedin.com/search/results/all/?keywords=Vrund%20Gurjar" target="_blank" rel="noopener">LinkedIn →</a>
               </div>
             </div>
           </div>
           <div class="divider"></div>
           <div class="grid-3">
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <div class="pill mono">Spring</div>
               <h3>Finance</h3>
               <p class="muted">Curriculum aligned to real‑world money skills and decisions that actually matter.</p>
             </div>
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <div class="pill mono">Economics</div>
               <h3>Experts</h3>
               <p class="muted">Guest speakers, mentors, and a national brain‑trust to accelerate your growth.</p>
             </div>
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <div class="pill mono">Powered</div>
               <h3>By Anant LLC</h3>
               <p class="muted">Operational support, polish, and infrastructure for a best‑in‑class experience.</p>
@@ -203,24 +252,24 @@
       </div>
     </section>
 
-    <section id="intro">
+    <section id="intro" class="reveal">
       <div class="container row">
-        <div class="card pad" style="grid-column:1 / -1">
+        <div class="card pad hover-tilt" style="grid-column:1 / -1">
           <div class="pill mono">What is AFEX?</div>
-          <h2 class="glow">Vision & Mission</h2>
+          <h2>Vision & Mission</h2>
           <p class="muted">Master practical, real‑world finance. Lead consulting projects with real businesses. Compete nationally against—and with—a modern community.</p>
         </div>
       </div>
     </section>
 
-    <section id="differentiation">
+    <section id="differentiation" class="reveal">
       <div class="container row">
-        <div class="card pad" style="grid-column:1 / -1">
+        <div class="card pad hover-tilt" style="grid-column:1 / -1">
           <div class="pill mono">Differentiation</div>
-          <h2 class="glow">What makes AFEX so special?</h2>
+          <h2>What makes AFEX so special?</h2>
           <div class="divider"></div>
           <div class="grid-2">
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>AFEX vs Traditional Business Clubs</h3>
               <table class="compare" aria-label="AFEX comparison table">
                 <thead>
@@ -259,7 +308,7 @@
                 </tbody>
               </table>
             </div>
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Annual Fee</h3>
               <p class="muted">The money is not just for participation—it's access to curriculum, competitions, and a professional network.</p>
               <div class="card pad" style="display:flex; align-items:center; justify-content:space-between">
@@ -268,7 +317,7 @@
                   <div class="headline" style="font-size:42px; margin-top:6px">$15</div>
                   <div class="muted">— cheaper than most clubs —</div>
                 </div>
-                <a class="btn" href="#join">Become a member</a>
+                <a class="btn" href="#join" data-magnet>Become a member</a>
               </div>
             </div>
           </div>
@@ -276,70 +325,75 @@
       </div>
     </section>
 
-    <section id="membership">
+    <section id="membership" class="reveal">
       <div class="container row">
-        <div class="card pad" style="grid-column:1 / -1">
+        <div class="card pad hover-tilt" style="grid-column:1 / -1">
           <div class="pill mono">Curriculum Access</div>
-          <h2 class="glow">Overview</h2>
+          <h2>Overview</h2>
           <p class="muted">AFEX empowers students with practical finance education across key areas: credit & debt, investing & wealth‑building, insurance, and real estate. Designed for all experience levels, AFEX meets you where you are and helps you grow into a confident financial leader.</p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:10px">
+            <button class="btn" id="copyBlurb" data-magnet>Copy Recruit Blurb</button>
+            <a class="btn" href="#networking" data-magnet>See Networking</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="leadership">
+    <section id="leadership" class="reveal">
       <div class="container row">
-        <div class="card pad" style="grid-column:1 / -1">
+        <div class="card pad hover-tilt" style="grid-column:1 / -1">
           <div class="pill mono">Real Experience • Real Leadership</div>
-          <h2 class="glow">Why leadership matters</h2>
+          <h2>Why leadership matters</h2>
           <div class="grid-3" style="margin-top:10px">
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Apply knowledge</h3>
               <p class="muted">Consulting projects, case competitions, and guest speakers translate learning into results.</p>
             </div>
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Build your portfolio</h3>
               <p class="muted">Internships, writing teams, and national roles help you stand out.</p>
             </div>
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Network</h3>
-              <p class="muted">5+ networking opportunities and <span class="nowrap">15+ meetings</span> per academic year.</p>
+              <p class="muted">5+ networking opportunities and <span style="white-space:nowrap">15+ meetings</span> per academic year.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="requirements">
+    <section id="requirements" class="reveal">
       <div class="container row">
-        <div class="card pad" style="grid-column:1 / -1">
+        <div class="card pad hover-tilt" style="grid-column:1 / -1">
           <div class="pill mono">Requirements</div>
-          <h2 class="glow">Chapter expectations</h2>
+          <h2>Chapter expectations</h2>
           <div class="grid-3" style="margin-top:10px">
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Organization</h3>
               <p class="muted">Be organized at either the school or city level.</p>
             </div>
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Meetings</h3>
               <p class="muted">15+ meetings per academic year.</p>
             </div>
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Community</h3>
               <p class="muted">Host fundraising or outreach events annually.</p>
             </div>
           </div>
           <div class="divider"></div>
           <div class="grid-2">
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Scholarships</h3>
               <p class="muted">AFEX offers merit‑based scholarships to students showing leadership, initiative, and real impact. Awards go to those who grow chapters, win competitions, or lead nationally.</p>
+              <a class="btn" href="mailto:hello@afex.org?subject=AFEX%20Scholarships&body=Hi%20AFEX%20Team%2C%0A%0AI%27d%20like%20to%20learn%20about%20scholarships.%20Thanks!" data-magnet>Ask About Scholarships</a>
             </div>
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt" id="comms">
               <h3>Communication</h3>
               <p class="muted">Discord is our hub for member updates and resources. Slack is used by national officers for planning and coordination.</p>
-              <div style="display:flex; gap:12px; flex-wrap:wrap">
-                <span class="pill">Discord</span>
-                <span class="pill">Slack</span>
+              <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px">
+                <button class="btn" id="discordBtn" data-magnet>Join Discord</button>
+                <a class="btn" href="https://slack.com/" target="_blank" rel="noopener" data-magnet>Open Slack</a>
               </div>
             </div>
           </div>
@@ -347,13 +401,13 @@
       </div>
     </section>
 
-    <section id="tips">
+    <section id="tips" class="reveal">
       <div class="container row">
-        <div class="card pad" style="grid-column:1 / -1">
+        <div class="card pad hover-tilt" style="grid-column:1 / -1">
           <div class="pill mono">Tips & Tricks</div>
-          <h2 class="glow">Chapter foundations</h2>
+          <h2>Chapter foundations</h2>
           <div class="grid-3" style="margin-top:10px">
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Core Team</h3>
               <ul class="muted">
                 <li>Recruit 3–5 committed members to start</li>
@@ -361,7 +415,7 @@
                 <li>Quality over quantity</li>
               </ul>
             </div>
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Location</h3>
               <ul class="muted">
                 <li>Secure a reliable meeting space</li>
@@ -369,7 +423,7 @@
                 <li>Consider hybrid options for flexibility</li>
               </ul>
             </div>
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Outreach</h3>
               <ul class="muted">
                 <li>Collaborate with business/econ clubs</li>
@@ -382,46 +436,51 @@
           <div class="divider"></div>
 
           <div class="grid-2">
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Leadership recruitment</h3>
               <p class="muted">High‑impact officers build strong chapters. Target students already leading other clubs and underclassmen with potential for long‑term continuity.</p>
             </div>
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Useful platforms</h3>
               <ul class="muted">
                 <li><strong>Google Forms</strong> — screen applicants, set standards, track attendance</li>
                 <li><strong>Notion</strong> — organize applications & workflows</li>
                 <li><strong>Tally</strong> — simplify officer applications, collect key info</li>
               </ul>
+              <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px">
+                <a class="btn" href="https://forms.google.com/" target="_blank" rel="noopener" data-magnet>Open Forms</a>
+                <a class="btn" href="https://www.notion.so/" target="_blank" rel="noopener" data-magnet>Open Notion</a>
+                <a class="btn" href="https://tally.so/" target="_blank" rel="noopener" data-magnet>Open Tally</a>
+              </div>
             </div>
           </div>
 
           <div class="divider"></div>
 
-          <h3 class="glow">Meeting timeline</h3>
+          <h3>Meeting timeline</h3>
           <div class="timeline" style="margin-top:12px">
-            <div class="t-item">
+            <div class="t-item reveal">
               <div class="t-dot"></div>
               <div>
                 <strong>Networking • 10 minutes</strong>
                 <p class="muted">Icebreakers and member updates.</p>
               </div>
             </div>
-            <div class="t-item">
+            <div class="t-item reveal">
               <div class="t-dot"></div>
               <div>
                 <strong>Education block • 25 minutes</strong>
                 <p class="muted">Core content or a guest speaker.</p>
               </div>
             </div>
-            <div class="t-item">
+            <div class="t-item reveal">
               <div class="t-dot"></div>
               <div>
                 <strong>Application • 15 minutes</strong>
                 <p class="muted">Case study or project—AFEX will provide.</p>
               </div>
             </div>
-            <div class="t-item">
+            <div class="t-item reveal">
               <div class="t-dot"></div>
               <div>
                 <strong>Business wrap • 10 minutes</strong>
@@ -433,75 +492,84 @@
       </div>
     </section>
 
-    <section id="curriculum">
+    <section id="curriculum" class="reveal">
       <div class="container row">
-        <div class="card pad" style="grid-column:1 / -1">
+        <div class="card pad hover-tilt" style="grid-column:1 / -1">
           <div class="pill mono">Curriculum & Competition</div>
-          <h2 class="glow">Curriculum overview</h2>
+          <h2>Curriculum overview</h2>
           <div class="grid-4" style="margin-top:10px">
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Credit & Debt</h3>
               <p class="muted">Use credit and debit wisely, build strong credit early, and unlock future opportunities.</p>
+              <a class="btn" href="#competition" data-magnet>See Cases</a>
             </div>
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Investing</h3>
               <p class="muted">Learn how stocks and index funds grow wealth through smart, long‑term investing.</p>
+              <a class="btn" href="#competition" data-magnet>See Stock Pitch</a>
             </div>
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Insurance</h3>
               <p class="muted">Understand how insurance protects your finances—health, auto, life, and renters’ coverage.</p>
+              <a class="btn" href="#networking" data-magnet>Find Mentors</a>
             </div>
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Real Estate</h3>
               <p class="muted">See how rentals, appreciation, and smart ownership build wealth.</p>
+              <a class="btn" href="#networking" data-magnet>Join Workshop</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="networking">
+    <section id="networking" class="reveal">
       <div class="container row">
-        <div class="card pad" style="grid-column:1 / -1">
+        <div class="card pad hover-tilt" style="grid-column:1 / -1">
           <div class="pill mono">Networking</div>
-          <h2 class="glow">Members • Events</h2>
+          <h2>Members • Events</h2>
           <p class="muted">Members across the country connect via Discord and Slack—fostering community, sharing ideas, asking questions, and building relationships. We also host regular virtual events with other clubs and professionals to expand your network beyond your local school.</p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px">
+            <a class="btn" href="#join" data-magnet>Upcoming Events</a>
+            <a class="btn" href="#comms" data-magnet>Communication Hub</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="competition">
+    <section id="competition" class="reveal">
       <div class="container row">
-        <div class="card pad" style="grid-column:1 / -1">
+        <div class="card pad hover-tilt" style="grid-column:1 / -1">
           <div class="pill mono">Competition</div>
-          <h2 class="glow">Stock Pitch & Consultation</h2>
+          <h2>Stock Pitch & Consultation</h2>
           <div class="grid-2" style="margin-top:10px">
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Stock Pitch</h3>
               <p class="muted">Held twice a year. Teams of up to three present real investment ideas to a panel of judges—building skill in research, financial analysis, and public speaking.</p>
               <p class="muted">Categories and guidelines shared closer to the event.</p>
-              <a class="btn" href="#join">Get notified</a>
+              <a class="btn" href="mailto:hello@afex.org?subject=Notify%20me%20about%20Stock%20Pitch&body=Hi%20AFEX%2C%20please%20notify%20me%20about%20the%20next%20Stock%20Pitch." data-magnet>Get notified</a>
             </div>
-            <div class="card pad">
+            <div class="card pad reveal hover-tilt">
               <h3>Consultation</h3>
               <p class="muted">Teams of 3–5 solve real business challenges using real company data over two weeks. Present strategic recommendations to industry experts.</p>
               <p class="muted">More details shared closer to the event.</p>
-              <a class="btn" href="#join">Get notified</a>
+              <a class="btn" href="mailto:hello@afex.org?subject=Notify%20me%20about%20Consultation&body=Hi%20AFEX%2C%20please%20notify%20me%20about%20the%20next%20Consultation%20competition." data-magnet>Get notified</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="join">
+    <section id="join" class="reveal">
       <div class="container row">
-        <div class="card pad center" style="grid-column:1 / -1">
+        <div class="card pad center hover-tilt" style="grid-column:1 / -1">
           <div class="pill mono">Ready?</div>
-          <h2 class="glow" style="margin-top:10px">Join AFEX</h2>
+          <h2 style="margin-top:10px">Join AFEX</h2>
           <p class="muted">Become part of a modern finance community. National network. Real experience. Real results.</p>
           <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:10px">
-            <a class="btn" href="mailto:hello@afex.org?subject=Join%20AFEX">Email us</a>
-            <a class="btn" href="#" onclick="alert('Discord invite coming soon!')">Join Discord</a>
+            <a class="btn" href="mailto:hello@afex.org?subject=Join%20AFEX" data-magnet>Email us</a>
+            <button class="btn" id="discordBtn2" data-magnet>Join Discord</button>
+            <a class="btn" href="#handbook" data-magnet>Back to top</a>
           </div>
         </div>
       </div>
@@ -514,18 +582,85 @@
         <div class="logo" aria-hidden="true" style="width:28px; height:28px"></div>
         <span class="mono">AFEX © <span id="year"></span></span>
       </div>
-      <div class="mono ghost">D R E A M • B U I L D • L E A D • L E A R N</div>
+      <div class="mono" style="opacity:.85">D R E A M • B U I L D • L E A D • L E A R N</div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap">
+        <button class="btn" id="palette2" data-magnet>Change Palette</button>
+        <button class="btn" id="printBtn" data-magnet>Print</button>
+      </div>
     </div>
   </footer>
 
-  <button id="toTop" title="Back to top" aria-label="Back to top" style="position:fixed; right:18px; bottom:18px; border:none; cursor:pointer; padding:12px 14px; border-radius:14px; background:linear-gradient(180deg,#1a2240,#141b33); color:white; border:1px solid rgba(124,156,244,.35); box-shadow:0 8px 24px rgba(0,0,0,.35); display:none">↑</button>
+  <!-- Side TOC -->
+  <div class="toc">
+    <button class="btn" id="tocToggle" data-magnet>☰ Contents</button>
+    <div class="toc-panel" id="tocPanel" aria-hidden="true">
+      <a href="#handbook">Handbook</a>
+      <a href="#spotlight">Spotlight</a>
+      <a href="#intro">Intro</a>
+      <a href="#differentiation">Differentiation</a>
+      <a href="#membership">Membership</a>
+      <a href="#leadership">Leadership</a>
+      <a href="#requirements">Requirements</a>
+      <a href="#tips">Tips & Tricks</a>
+      <a href="#curriculum">Curriculum</a>
+      <a href="#networking">Networking</a>
+      <a href="#competition">Competition</a>
+      <a href="#join">Join</a>
+    </div>
+  </div>
+
+  <button id="toTop" title="Back to top" aria-label="Back to top" class="btn" style="position:fixed; right:18px; bottom:18px; display:none">↑</button>
+
+  <!-- Discord Modal (no real link yet) -->
+  <dialog id="discordModal" style="border:none; border-radius:18px; padding:0; background:linear-gradient(180deg,#1a1036,#120b24); color:var(--txt); width:min(480px,92vw)">
+    <div class="pad">
+      <h3 style="margin:0 0 8px">Discord invite</h3>
+      <p class="muted" id="discordState">Invite link coming soon. Meanwhile, email us and we'll add you.</p>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px">
+        <a class="btn" id="discordOpen" href="#" target="_blank" rel="noopener">Try open</a>
+        <a class="btn" href="mailto:hello@afex.org?subject=Discord%20Access&body=Hi%20AFEX%20Team%2C%20please%20add%20me%20to%20Discord." >Email for access</a>
+        <button class="btn" id="discordClose">Close</button>
+      </div>
+    </div>
+  </dialog>
 
   <script>
-    // Luigi-level polish ✨: robust theme handling, motion safety, and small UX niceties.
+    // ======================
+    // Luigi-level polish ✨
+    // ======================
     (function(){
       const root = document.documentElement;
       const modeBtn = document.getElementById('mode');
+      const paletteBtn = document.getElementById('palette');
+      const paletteBtn2 = document.getElementById('palette2');
       const toTop = document.getElementById('toTop');
+      const tocToggle = document.getElementById('tocToggle');
+      const tocPanel = document.getElementById('tocPanel');
+      const year = document.getElementById('year');
+      const shareBtn = document.getElementById('shareBtn');
+      const copyBlurb = document.getElementById('copyBlurb');
+      const printBtn = document.getElementById('printBtn');
+      const downloadPdf = document.getElementById('downloadPdf');
+
+      // Palette cycles — four purple vibes
+      const palettes = [
+        {p1:'#a78bfa', p2:'#8b5cf6', p3:'#7c3aed', p4:'#6d28d9', p5:'#c084fc'}, // Vapor Violet
+        {p1:'#c4b5fd', p2:'#a78bfa', p3:'#8b5cf6', p4:'#7c3aed', p5:'#e879f9'}, // Neon Orchid
+        {p1:'#ddd6fe', p2:'#a78bfa', p3:'#6d28d9', p4:'#4c1d95', p5:'#d946ef'}, // Royal Plum
+        {p1:'#b9a7ff', p2:'#9a7bff', p3:'#7b5cff', p4:'#5a3cff', p5:'#e0aaff'}, // Cyber Grape
+      ];
+      let palIndex = +localStorage.getItem('afex-pal-index') || 0;
+      function applyPalette(idx){
+        const p = palettes[idx % palettes.length];
+        root.style.setProperty('--p1', p.p1);
+        root.style.setProperty('--p2', p.p2);
+        root.style.setProperty('--p3', p.p3);
+        root.style.setProperty('--p4', p.p4);
+        root.style.setProperty('--p5', p.p5);
+        localStorage.setItem('afex-pal-index', idx % palettes.length);
+      }
+
+      // Theme (light/dark)
       const prefersLight = window.matchMedia('(prefers-color-scheme: light)');
       const getMode = () => localStorage.getItem('afex-mode');
       const setMode = val => localStorage.setItem('afex-mode', val);
@@ -547,10 +682,18 @@
         if(!getMode()) applyMode(e.matches ? 'light' : 'dark');
       });
 
-      // Back to top visibility
-      const onScroll = () => { toTop.style.display = window.scrollY > 400 ? 'block' : 'none'; };
+      // Palette controls
+      function cyclePalette(){ palIndex = (palIndex + 1) % palettes.length; applyPalette(palIndex); }
+      paletteBtn.addEventListener('click', cyclePalette);
+      paletteBtn2.addEventListener('click', cyclePalette);
+
+      // Back to top
+      const onScroll = () => { toTop.style.display = window.scrollY > 400 ? 'inline-flex' : 'none'; };
       window.addEventListener('scroll', onScroll, {passive:true});
       toTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+      // Year
+      if(year) year.textContent = new Date().getFullYear();
 
       // External link nicety
       document.addEventListener('click', (e)=>{
@@ -560,21 +703,71 @@
         if(url.origin !== location.origin){ a.setAttribute('target','_blank'); a.setAttribute('rel','noopener'); }
       });
 
-      // Current year
-      const y = document.getElementById('year'); if(y) y.textContent = new Date().getFullYear();
+      // Reveal on scroll
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('show'); io.unobserve(en.target);} });
+      }, { threshold:.12 });
+      document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
 
-      // Small hover parallax on cards (nikilis-esque ✨)
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(c => {
-        c.addEventListener('mousemove', (e)=>{
-          const r = c.getBoundingClientRect();
-          const x = (e.clientX - r.left) / r.width - .5;
-          const y = (e.clientY - r.top) / r.height - .5;
-          c.style.transform = `translateY(-2px) perspective(800px) rotateX(${y*-2}deg) rotateY(${x*2}deg)`;
+      // Magnetic buttons + ripple
+      function addRipple(e){
+        const btn = e.currentTarget;
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - r.left; const y = e.clientY - r.top;
+        const s = document.createElement('span'); s.className='ripple'; s.style.left=x+'px'; s.style.top=y+'px';
+        btn.appendChild(s); setTimeout(()=> s.remove(), 700);
+      }
+      const magnets = document.querySelectorAll('[data-magnet]');
+      magnets.forEach(b=>{
+        b.addEventListener('pointermove', (e)=>{
+          const r=b.getBoundingClientRect(); const x=(e.clientX - r.left)/r.width - .5; const y=(e.clientY - r.top)/r.height - .5;
+          b.style.transform=`translate(${x*6}px, ${y*6}px)`;
         });
-        c.addEventListener('mouseleave', ()=>{ c.style.transform = 'translateY(0)'; });
+        b.addEventListener('pointerleave', ()=> b.style.transform='');
+        b.addEventListener('click', addRipple);
       });
 
+      // TOC panel toggle
+      tocToggle.addEventListener('click', ()=>{
+        const visible = tocPanel.style.display === 'block';
+        tocPanel.style.display = visible ? 'none' : 'block';
+        tocPanel.setAttribute('aria-hidden', visible ? 'true' : 'false');
+      });
+      tocPanel.addEventListener('click', (e)=>{ if(e.target.matches('a')) { tocPanel.style.display='none'; tocPanel.setAttribute('aria-hidden','true'); }});
+
+      // Share API
+      shareBtn.addEventListener('click', async ()=>{
+        const data = { title:'AFEX Handbook', text:'AFEX – Dream • Build • Lead • Learn', url: location.href };
+        if(navigator.share){ try{ await navigator.share(data);}catch{} } else { await navigator.clipboard.writeText(data.url); alert('Link copied to clipboard'); }
+      });
+
+      // Copy recruitment blurb
+      const blurb = `Join AFEX — a modern finance community. Learn credit, investing, insurance, and real estate. Build real projects, compete nationally, and grow your network. Join: ${location.origin+location.pathname}#join`;
+      copyBlurb.addEventListener('click', async ()=>{ await navigator.clipboard.writeText(blurb); alert('Recruitment blurb copied!'); });
+
+      // Print / PDF
+      printBtn.addEventListener('click', ()=> window.print());
+      downloadPdf.addEventListener('click', (e)=>{ e.preventDefault(); window.print(); });
+
+      // Discord modal logic (works even without real link)
+      const DISCORD_INVITE = '';// set your real invite e.g. 'https://discord.gg/abcdef'
+      const discordBtn = document.getElementById('discordBtn');
+      const discordBtn2 = document.getElementById('discordBtn2');
+      const modal = document.getElementById('discordModal');
+      const openTry = document.getElementById('discordOpen');
+      const closeBtn = document.getElementById('discordClose');
+      const state = document.getElementById('discordState');
+
+      function openDiscord(){
+        if(DISCORD_INVITE){ window.open(DISCORD_INVITE, '_blank', 'noopener'); }
+        else { modal.showModal(); state.textContent = 'Invite link coming soon. Meanwhile, email us and we\'ll add you.'; openTry.href = 'https://discord.com/channels/@me'; }
+      }
+      discordBtn.addEventListener('click', openDiscord);
+      discordBtn2.addEventListener('click', openDiscord);
+      closeBtn.addEventListener('click', ()=> modal.close());
+
+      // Init
+      applyPalette(palIndex);
       initMode();
       onScroll();
     })();
